@@ -17,6 +17,25 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
+    <!-- Set GPS parameters. -->
+    <string-array name="config_gpsParameters">
+        <item>XTRA_SERVER_1=http://xtrapath1.izatcloud.net/xtra3grc.bin</item>
+        <item>XTRA_SERVER_2=http://xtrapath2.izatcloud.net/xtra3grc.bin</item>
+        <item>XTRA_SERVER_3=http://xtrapath3.izatcloud.net/xtra3grc.bin</item>
+        <item>NTP_SERVER=time.izatcloud.net</item>
+        <item>SUPL_MODE=0</item>
+        <item>SUPL_HOST=NONE</item>
+        <item>SUPL_PORT=7275</item>
+        <item>SUPL_VER=0x20000</item>
+        <item>LPP_PROFILE=3</item>
+        <item>NMEA_PROVIDER=0</item>
+        <item>A_GLONASS_POS_PROTOCOL_SELECT=0</item>
+        <item>ERR_ESTIMATE=0</item>
+        <item>INTERMEDIATE_POS=1</item>
+        <item>SUPL_ES=0</item>
+        <item>GPS_LOCK=0</item>
+    </string-array>
+
     <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
     <bool name="config_intrusiveNotificationLed">true</bool>
 
@@ -41,13 +60,23 @@
          backlight values for LUX levels between these control points.
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
-        <item>8</item>
-        <item>35</item>
-        <item>100</item>
+        <item>5</item>
+        <item>10</item>
+        <item>20</item>
+        <item>40</item>
+        <item>80</item>
+        <item>150</item>
         <item>300</item>
-        <item>1500</item>
-        <item>3500</item>
-        <item>7000</item>
+        <item>550</item>
+        <item>700</item>
+        <item>850</item>
+        <item>900</item>
+        <item>1000</item>
+        <item>2200</item>
+        <item>3400</item>
+        <item>4000</item>
+        <item>8000</item>
+        <item>10000</item>
     </integer-array>
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
@@ -56,15 +85,50 @@
          The brightness values must be between 0 and 255 and be non-decreasing.
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>10</item>
-        <item>20</item>
-        <item>40</item>
-        <item>70</item>
-        <item>110</item>
-        <item>160</item>
-        <item>200</item>
-        <item>255</item>
+        <item>2</item>      <!-- 0-5 LUX -->
+        <item>30</item>     <!-- 6-10 LUX -->
+        <item>40</item>     <!-- 11-20 LUX -->
+        <item>70</item>     <!-- 21-40 LUX -->
+        <item>95</item>     <!-- 41-80 LUX -->
+        <item>110</item>    <!-- 81-150 LUX -->
+        <item>120</item>    <!-- 151-300 LUX -->
+        <item>135</item>    <!-- 301-550 LUX -->
+        <item>140</item>    <!-- 551-700 LUX -->
+        <item>155</item>    <!-- 701-850 LUX -->
+        <item>160</item>    <!-- 851-900 LUX -->
+        <item>170</item>    <!-- 901-1000 LUX -->
+        <item>185</item>    <!-- 1001-2200 LUX -->
+        <item>195</item>    <!-- 2201-3400 LUX -->
+        <item>206</item>    <!-- 3401-4000 LUX -->
+        <item>220</item>    <!-- 4001-8000 LUX -->
+        <item>230</item>    <!-- 8001-10000 LUX -->
+        <item>255</item>    <!-- 10000+ LUX -->
     </integer-array>
+
+    <bool name="config_allowAllRotations">false</bool>                      <!-- Allow all rotations -->
+
+    <!-- import huawei-kirin-common overlay -->
+    <bool name="config_autoBrightnessResetAmbientLuxAfterWarmUp">true</bool>
+    <integer name="config_autoBrightnessAmbientLightHorizon">10000</integer>
+    <integer name="config_autoBrightnessBrighteningLightDebounce">4000</integer>
+    <integer name="config_autoBrightnessDarkeningLightDebounce">8000</integer>
+    <integer name="config_autoBrightnessInitialLightSensorRate">-1</integer>
+    <integer name="config_autoBrightnessLightSensorRate">300</integer>
+    <integer name="config_brightness_ramp_rate_fast">200</integer>
+    <integer name="config_brightness_ramp_rate_slow">40</integer>
+
+    <!-- Show virtual navigation keys by default. -->
+    <bool name="config_supportSystemNavigationKeys">true</bool>
+    <bool name="config_showNavigationBar">true</bool>
+
+    <!-- Add minimal screen curve as requested. -->
+    <dimen name="rounded_corner_radius">10.0dip</dimen>
+    <dimen name="rounded_corner_radius_bottom">10.0dip</dimen>
+    <dimen name="rounded_corner_radius_top">10.0dip</dimen>
+
+    <!-- Multi-user support -->
+    <bool name="config_enableMultiUserUI">false</bool>                      <!-- Enable multi-user support -->
+    <integer name="config_multiuserMaximumUsers">5</integer>                <!-- Max user for multi-user -->
 
     <!-- Screen brightness used to dim the screen when the user activity
          timeout expires.  May be less than the minimum allowed brightness setting
@@ -201,15 +265,15 @@
     <bool name="config_hotswapCapable">true</bool>
 
     <!-- Flag specifying whether VoLTE is available on device -->
-    <bool name="config_device_volte_available">true</bool>
+    <bool name="config_device_volte_available">false</bool>
 
     <!-- Flag specifying whether VoLTE should be available for carrier: independent of
          carrier provisioning. If false: hard disabled. If true: then depends on carrier
          provisioning, availability etc -->
-    <bool name="config_carrier_volte_available">true</bool>
+    <bool name="config_carrier_volte_available">false</bool>
 
     <!-- Flag specifying whether VoLTE is available on device -->
-    <bool name="config_device_vt_available">true</bool>
+    <bool name="config_device_vt_available">false</bool>
 
     <!-- Config determines whether to update phone object when voice registration
          state changes. Voice radio tech change will always trigger an update of
@@ -218,25 +282,6 @@
 
     <!-- Flag indicating if the speed up audio on mt call code should be executed -->
     <bool name="config_speed_up_audio_on_mt_calls">true</bool>
-
-    <!-- Vibrator pattern for feedback about a long screen/key press -->
-    <integer-array name="config_longPressVibePattern">
-        <item>0</item>
-        <item>28</item>
-        <item>10</item>
-    </integer-array>
-
-    <!-- Vibrator pattern for feedback about touching a virtual key -->
-    <integer-array name="config_virtualKeyVibePattern">
-        <item>0</item>
-        <item>28</item>
-        <item>8</item>
-    </integer-array>
-
-    <!-- Vibrator pattern for a very short but reliable vibration for soft keyboard tap -->
-    <integer-array name="config_keyboardTapVibePattern">
-        <item>28</item>
-    </integer-array>
 
     <!-- Flag indicating which package name can access the persistent data partition -->
     <string name="config_persistentDataPackageName" translatable="false">com.google.android.gms</string>
@@ -269,7 +314,7 @@
     <!-- Screen brightness used to dim the screen while dozing in a very low power state.
          May be less than the minimum allowed brightness setting
          that can be set by the user. -->
-    <integer name="config_screenBrightnessDoze">17</integer>
+    <integer name="config_screenBrightnessDoze">5</integer>
 
     <!-- If true, the doze component is not started until after the screen has been
          turned off and the screen off animation has been performed. -->
@@ -332,7 +377,7 @@
     <bool name="config_setColorTransformAccelerated">true</bool>
 
     <!-- Whether device supports double tap to wake -->
-    <bool name="config_supportDoubleTapWake">true</bool>
+    <bool name="config_supportDoubleTapWake">false</bool>
 
     <!-- Whether or not swipe up gesture's opt-in setting is available on this device -->
     <bool name="config_swipe_up_gesture_setting_available">true</bool>
